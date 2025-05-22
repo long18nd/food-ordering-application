@@ -1,6 +1,8 @@
-import {useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {MagnifyingGlassIcon, XMarkIcon} from "@heroicons/react/24/solid";
+import type {SearchOptions} from "../../types";
+import {searchAPI} from "../../api/search/search.ts";
 
 interface SearchBarProps {
     placeholder?: string;
@@ -25,24 +27,24 @@ const SearchBar = ({
     const searchRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
-    // const handleSearchChange = useCallback(
-    //     async (e: React.ChangeEvent<HTMLInputElement>) => {
-    //         const value = e.target.value;
-    //         setQuery(value);
-    //         if (value.length > 2) {
-    //             setIsSearching(true);
-    //             setShowResults(true);
-    //
-    //             const searchReq: SearchOptions = { query: value };
-    //             const searchResults = await searchAPI(searchReq);
-    //             setResults(searchResults);
-    //             setIsSearching(false);
-    //         } else {
-    //             setResults([]);
-    //         }
-    //     },
-    //     []
-    // );
+    const handleSearchChange = useCallback(
+        async (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            setQuery(value);
+            if (value.length > 2) {
+                setIsSearching(true);
+                setShowResults(true);
+
+                const searchReq: SearchOptions = { query: value };
+                const searchResults = await searchAPI(searchReq);
+                setResults(searchResults);
+                setIsSearching(false);
+            } else {
+                setResults([]);
+            }
+        },
+        []
+    );
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -87,8 +89,7 @@ const SearchBar = ({
                     className="bg-white w-80 p-3 pl-10 pr-10 text-sm rounded-lg
                     focus:outline-none focus:ring-2 focus:ring-primary"
                     value={query}
-                    // onChange={handleSearchChange}
-                    onChange={(e) => console.log(e.target)}
+                    onChange={handleSearchChange}
                     placeholder={placeholder}
                 />
                 {query && (

@@ -26,7 +26,7 @@ const SideBar = ({isSideBarOpen, setIsSideBarOpen}:SideBarProps) => {
             <div>
                 {/* Logo */}
                 <div className='mb-10 px-2'>
-                    <h1 className='text-2xl font-bold'>Freshly <span className='text-primary text-3xl'>.</span></h1>
+                    <h1 className='text-2xl font-bold'>Shoppe Food <span className='text-primary text-3xl'>.</span></h1>
                 </div>
                 <nav className='space-y-6'>
                     <Link to="/" className="flex mb-8 items-center gap-3 text-gray-500 hover:text-primary">
