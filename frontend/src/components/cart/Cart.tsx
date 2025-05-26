@@ -8,6 +8,7 @@ import {
     setActiveCart,
 } from "../../store/feature/cart";
 import {useNavigate} from "react-router-dom";
+import {useEffect, useRef} from "react";
 
 const Cart = () => {
     const carts = useAppSelector(selectCarts);
@@ -19,6 +20,7 @@ const Cart = () => {
         dispatch(clearCart(id));
     };
 
+    const itemsContainerRef = useRef<HTMLDivElement>(null);
     const handleIncreaseQuantity = (id: string) => {
         if (!activeCart) {
             return;
@@ -48,6 +50,13 @@ const Cart = () => {
     };
 
     const activeCart = activeCartIndex !== null ? carts[activeCartIndex] : null;
+
+    useEffect(() => {
+        if (itemsContainerRef.current) {
+            itemsContainerRef.current.scrollTop = itemsContainerRef.current.scrollHeight;
+        }
+    }, [activeCart?.items.length]);
+
     return (
         <div className="m-2">
             {carts?.length > 1 && (
@@ -88,7 +97,7 @@ const Cart = () => {
                 {activeCart?.items.length === 0 ? (
                     <p className="text-gray-500">Your cart is empty</p>
                 ) : (
-                    <div className="mb-4 max-h-[500px] overflow-y-auto">
+                    <div className="mb-4 max-h-[500px] overflow-y-auto" ref={itemsContainerRef}>
                         {activeCart?.items?.map((item: any) => (
                             <div key={item.id} className="flex items-center gap-4">
                                 <div
