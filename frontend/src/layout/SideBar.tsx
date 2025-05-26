@@ -58,8 +58,6 @@ const SideBar = ({isSideBarOpen, setIsSideBarOpen}:SideBarProps) => {
             </div>
 
             <div>
-
-
                 <div className="mt-6 absolute bottom-10 w-54 bg-amber-500 p-4 rounded-lg">
                     <h3 className="text-sm text-white font-semibold">Upgrade your Account to Get Free Voucher</h3>
                     <button className="mt-3 bg-white text-sm py-2 px-4 rounded-md hover:bg-amber-100">Upgrade</button>

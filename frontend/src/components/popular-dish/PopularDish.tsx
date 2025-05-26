@@ -58,7 +58,7 @@ const PopularDish = () => {
                             <h3 className='font-medium mb-2'>{item.name}</h3>
                             <div className='flex justify-between items-center'>
                                 <span className='font-bold text-primary'>${item.price?.toFixed(2)}</span>
-                                <button className='bg-primary text-white p-2 rounded-md hover:bg-amber-600 transition-colors'>
+                                <button className='text-white p-2 rounded-md bg-amber-600 transition-colors'>
                                     <PlusIcon className='h-5 w-5'/>
                                 </button>
                             </div>

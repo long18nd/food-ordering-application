@@ -1,6 +1,8 @@
 import { HeartIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Rating from "../../../components/common/Rating.tsx";
 import type {MenuCategory} from "./RestaurantMenu.tsx";
+import {useAppDispatch} from "../../../store/hooks.ts";
+import {addItem} from "../../../store/feature/cart.ts";
 
 interface ResturantMenuCategory extends MenuCategory{
     restaurantId:string;
@@ -8,7 +10,7 @@ interface ResturantMenuCategory extends MenuCategory{
 }
 
 const ResturantMenuCategory = (category: ResturantMenuCategory) => {
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
 
     return (
@@ -55,16 +57,16 @@ const ResturantMenuCategory = (category: ResturantMenuCategory) => {
                         <div className="flex justify-between items-center">
                             <span className="font-bold text-primary">${item.price.toFixed(2)}</span>
                             <button
-                                className="bg-primary text-white p-2 rounded-md hover:bg-amber-600 transition-colors"
-                                // onClick={(e) => {
-                                //     e.stopPropagation();
-                                //     dispatch(addItem({
-                                //         item:item as any,
-                                //         restaurantId: category.restaurantId,
-                                //         restaurantName: category.restaurantName,
-                                //
-                                //     }))
-                                // }}
+                                className="text-white p-2 rounded-md bg-amber-600 transition-colors"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    dispatch(addItem({
+                                        item:item as any,
+                                        restaurantId: category.restaurantId,
+                                        restaurantName: category.restaurantName,
+
+                                    }))
+                                }}
                             >
                                 <PlusIcon className="h-5 w-5" />
                             </button>
